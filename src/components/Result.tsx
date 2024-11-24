@@ -34,6 +34,9 @@ const Result: React.FC<ResultProps> = ({
   return (
     <div className="p-4">
       <h2 className="text-xl font-bold mb-4">Resultados</h2>
+
+
+
       <div className="mt-6">
         <h3 className="text-xl font-bold">Puntaje Final</h3>
         <p className="text-2xl font-bold">
@@ -46,6 +49,18 @@ const Result: React.FC<ResultProps> = ({
           </span>
         </p>
       </div>
+      <div className="mt-6 bg-gray-100 p-4 rounded shadow">
+  <h3 className="text-lg font-bold text-gray-700">Resumen del Puntaje</h3>
+  <p className="text-gray-700">
+    ✅ <b>Correctas:</b> {correct} x 1 punto = {correct} puntos.
+  </p>
+  <p className="text-gray-700">
+    ❌ <b>Penalización:</b> {Math.floor(incorrect / 3)} punto(s) restado(s) por {incorrect} incorrectas.
+  </p>
+  <p className="text-gray-700">
+    ⚠️ <b>Sin Responder:</b> No afectan el puntaje.
+  </p>
+</div>
       <br />
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-green-100 p-4 rounded shadow">

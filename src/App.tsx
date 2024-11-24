@@ -46,31 +46,29 @@ const App: React.FC = () => {
     });
   };
 
-  const calculateResults = () => {
-    let correct = 0;
-    let incorrect = 0;
-    let unanswered = 0;
   
-    selectedQuestions.forEach((q) => {
-      const userAnswer = answers[q.id];
-  
-      if (userAnswer === null) {
-        // Incrementa solo el contador de respuestas no respondidas
-        unanswered++;
-      } else if (userAnswer === q.answer) {
-        // Incrementa las respuestas correctas
-        correct++;
-      } else {
-        // Incrementa solo las respuestas incorrectas seleccionadas
-        incorrect++;
-      }
-    });
-  
-    // Calcula el puntaje con correctas e incorrectas seleccionadas
-    const score = correct * 3 - incorrect;
-  
-    return { correct, incorrect, unanswered, score };
-  };
+    const calculateResults = () => {
+      let correct = 0;
+      let incorrect = 0;
+      let unanswered = 0;
+    
+      selectedQuestions.forEach((q) => {
+        const userAnswer = answers[q.id];
+        if (userAnswer === null) {
+          unanswered++; // No afecta el puntaje
+        } else if (userAnswer === q.answer) {
+          correct++; // Respuesta correcta suma puntos
+        } else {
+          incorrect++; // Respuesta incorrecta cuenta
+        }
+      });
+    
+      // Calcular el puntaje con la nueva regla
+      let penalty = Math.floor(incorrect / 3); // Por cada 3 incorrectas, resta 1 punto
+      const score = correct - penalty; // Correctas menos penalización
+    
+      return { correct, incorrect, unanswered, score };
+    };
 
   const results = calculateResults(); // Calcula los resultados
 
